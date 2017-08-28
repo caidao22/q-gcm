@@ -96,7 +96,7 @@ c***********************************************************************
       integer i,j,k,i1,iorest,nsko,nska,nt,lenod,lename,oceanonly,
      &        atmosonly,getcovar,outfloc(7),outflat(7),
      &        cyclicoc,hflxsb,hflxnb,tauudiff
-      double precision tspind
+      double precision tspind,r1array(1)
       character (len=72) :: name
       character (len=80) :: outdir, inpbuf
       logical resdmp,solnok,avgatm,avgocn
@@ -465,9 +465,11 @@ c***********************************************************************
       write(*,203) '  Mixed layer thickness   (m) = ',hmoc
       write(*,213) '  Sp. ht. cap. (J kg^-1 K^-1) = ',cpoc
       write(*,213) '  SST grad-2 diff  (m^2 s^-1) = ',st2d
-      call diffts (2, nlo, st2d, 1, dxo, rdefoc, dto)
+      r1array(1) = st2d
+      call diffts (2, nlo, r1array, 1, dxo, rdefoc, dto)
       write(*,213) '  SST grad-4 diff  (m^4 s^-1) = ',st4d
-      call diffts (4, nlo, st4d, 1, dxo, rdefoc, dto)
+      r1array(1) = st4d
+      call diffts (4, nlo, r1array, 1, dxo, rdefoc, dto)
       write(*,205) '  Abs. pot. temp. tabsoc  (K) = ',
      &             (tabsoc(k),k=1,nlo)
       write(*,203) '  Layer thicknesses hoc   (m) = ',(hoc(k),k=1,nlo)
@@ -530,11 +532,14 @@ c***********************************************************************
       write(*,213) '  Quad. drag coefft Cd (nond) = ',cdat
       write(*,213) '  Sp. ht. cap. (J kg^-1 K^-1) = ',cpat
       write(*,213) '  AST grad-2 diff  (m^2 s^-1) = ',at2d
-      call diffts (2, nla, at2d, 1, dxa, rdefat, dta)
+      r1array(1) = at2d
+      call diffts (2, nla, r1array, 1, dxa, rdefat, dta)
       write(*,213) '  AST grad-4 diff  (m^4 s^-1) = ',at4d
-      call diffts (4, nla, at4d, 1, dxa, rdefat, dta)
+      r1array(1) = at4d
+      call diffts (4, nla, r1array, 1, dxa, rdefat, dta)
       write(*,213) '  hmix diffusivity (m^2 s^-1) = ',ahmd
-      call diffts (2, nla, ahmd, 1, dxa, rdefat, dta)
+      r1array(1) = ahmd
+      call diffts (2, nla, r1array, 1, dxa, rdefat, dta)
       write(*,213) '  hmix damping coefft  hmadmp = ',hmadmp
       write(*,203) '  Layer thicknesses hat   (m) = ',(hat(k),k=1,nla)
       write(*,203) '  Total thickness   hta   (m) = ',hta
