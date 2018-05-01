@@ -1119,7 +1119,9 @@ c   atmospheric mixed layer thickness
 *     synchronously as post-processing routines assume this.
       call monnc_init
       print *,' Diagnostics netCDF file initialised'
-      call monnc_out
+*     oml has not been called yet, leaving some variables uninitialized
+***   so comment out the next line
+*     call monnc_out
 #  ifdef get_areav
 *     Area average output file
 *     ------------------------
